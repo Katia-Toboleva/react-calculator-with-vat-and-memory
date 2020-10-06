@@ -43,13 +43,15 @@ class Calculator extends React.Component {
 
   convertNumber() {
     const { currentNumber, savedNumber, operation } = this.state;
-    if(currentNumber === 0 && operation === undefined && savedNumber !== 0) {
+    if(operation === undefined && savedNumber !== 0 && currentNumber === 0) {
       return savedNumber * -1
-    } else if(currentNumber === 0 || operation === undefined) {
-      return `-${currentNumber}`
-    } else if(currentNumber === 0 || operation !== undefined) {
+    } else if(operation === undefined && savedNumber !== 0 && currentNumber !== 0) {
       return currentNumber * -1
-    } else if(currentNumber !== 0 || operation !== undefined) {
+    } else if(currentNumber === 0) {
+      return `-${0}`
+    } else if(operation !== undefined && !currentNumber) {
+      return `-${0}`
+    } else if(operation !== undefined && currentNumber) {
       return currentNumber * -1
     } else {
       return savedNumber * -1
@@ -90,7 +92,7 @@ class Calculator extends React.Component {
       };
     } else if (savedNumber &&!currentNumber) {
       return {
-        currentNumber: '',
+        currentNumber: 0,
         savedNumber: Number.parseFloat((savedNumber).toFixed(5)),
         operation: value,
       };
@@ -214,9 +216,7 @@ class Calculator extends React.Component {
     } else if (value === 'clear-all') {
       newState = this.handleClearAll(type);
     } else if (value === 'convert') {
-      if (`${currentNumber}`.indexOf('-') === -1) {
       newState = this.handleConvert(type);
-      }
     } else if (value === 'memo-save') {
       newState = this.handleMemoSave();
     } else if (value === 'memo-add') {

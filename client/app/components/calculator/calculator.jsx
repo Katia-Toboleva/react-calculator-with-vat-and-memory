@@ -1,10 +1,8 @@
 import React from 'react';
 import styles from './calculator.scss';
-import {Row, Column} from '../grid';
-import {Controls} from '../controls';
-import {Result} from '../result';
-
-
+import { Row, Column } from '../grid';
+import { Controls } from '../controls';
+import { Result } from '../result';
 
 class Calculator extends React.Component {
   constructor(props) {
@@ -16,13 +14,13 @@ class Calculator extends React.Component {
       operation: '',
       memoValue: 0,
       vatPercent: 20,
-    }
+    };
   }
 
   calculateTotal() {
     const { currentNumber, savedNumber, operation } = this.state;
     let total;
-    switch(operation) {
+    switch (operation) {
       case 'add': total = savedNumber + currentNumber; break;
       case 'multiply': total = savedNumber * currentNumber; break;
       case 'subtract': total = savedNumber - currentNumber; break;
@@ -35,27 +33,25 @@ class Calculator extends React.Component {
   calculatePercent() {
     const { currentNumber, savedNumber, operation } = this.state;
     if (savedNumber && currentNumber && operation !== 'multiply' && operation !== 'divide') {
-      return (currentNumber * savedNumber / 100)
-    } else {
-      return currentNumber * 0.01;
+      return ((currentNumber * savedNumber) / 100);
     }
+    return currentNumber * 0.01;
   }
 
   convertNumber() {
     const { currentNumber, savedNumber, operation } = this.state;
-    if(operation === undefined && savedNumber !== 0 && currentNumber === 0) {
-      return savedNumber * -1
-    } else if(operation === undefined && savedNumber !== 0 && currentNumber !== 0) {
-      return currentNumber * -1
-    } else if(currentNumber === 0) {
-      return `-${0}`
-    } else if(operation !== undefined && !currentNumber) {
-      return `-${0}`
-    } else if(operation !== undefined && currentNumber) {
-      return currentNumber * -1
-    } else {
-      return savedNumber * -1
+    if (operation === undefined && savedNumber !== 0 && currentNumber === 0) {
+      return savedNumber * -1;
+    } if (operation === undefined && savedNumber !== 0 && currentNumber !== 0) {
+      return currentNumber * -1;
+    } if (currentNumber === 0) {
+      return `-${0}`;
+    } if (operation !== undefined && !currentNumber) {
+      return `-${0}`;
+    } if (operation !== undefined && currentNumber) {
+      return currentNumber * -1;
     }
+    return savedNumber * -1;
   }
 
   recordValue() {
@@ -63,14 +59,13 @@ class Calculator extends React.Component {
     if (savedNumber) {
       return savedNumber;
     }
-    else {
-      return currentNumber;
-    }
+
+    return currentNumber;
   }
 
   concatenateDisplayValues(value) {
     const { currentNumber } = this.state;
-    let num = (currentNumber === 0)
+    const num = (currentNumber === 0)
       ? value
       : `${currentNumber}${value}`;
     return num;
@@ -90,23 +85,22 @@ class Calculator extends React.Component {
         savedNumber: Number.parseFloat((this.calculateTotal()).toFixed(5)),
         operation: value,
       };
-    } else if (savedNumber &&!currentNumber) {
+    } if (savedNumber && !currentNumber) {
       return {
         currentNumber: 0,
         savedNumber: Number.parseFloat((savedNumber).toFixed(5)),
         operation: value,
       };
-    } else {
-      return {
-        currentNumber: 0,
-        savedNumber: Number.parseFloat((currentNumber).toFixed(5)),
-        operation: value,
-      };
     }
+    return {
+      currentNumber: 0,
+      savedNumber: Number.parseFloat((currentNumber).toFixed(5)),
+      operation: value,
+    };
   }
 
   handleClearC(type) {
-    return{
+    return {
       currentType: type,
       currentNumber: '0',
     };
@@ -193,7 +187,7 @@ class Calculator extends React.Component {
     return {
       currentNumber: currentNumber - (parseFloat((((currentNumber / Number(`1.${vatPercent}`)) - currentNumber) * -1).toFixed(2))),
       currentType: type,
-    }
+    };
   }
 
   handleEquals() {
@@ -205,9 +199,11 @@ class Calculator extends React.Component {
   }
 
   handleButtonClick(type, value) {
-    const { currentNumber, savedNumber,  memoValue, vatPercent } = this.state;
+    const {
+      currentNumber, savedNumber, memoValue, vatPercent,
+    } = this.state;
     let newState;
-    if(type === 'num') {
+    if (type === 'num') {
       newState = this.handleNumber(type, value);
     } else if (type === 'operation') {
       newState = this.handleOperation(currentNumber, savedNumber, value);
@@ -245,9 +241,10 @@ class Calculator extends React.Component {
     this.setState(newState);
   }
 
-  render () {
-    console.log(this.state)
-    const { currentNumber, savedNumber, operation, vatPercent } = this.state;
+  render() {
+    const {
+      currentNumber, savedNumber, operation, vatPercent,
+    } = this.state;
 
     return (
       <div className={styles.calculator}>
@@ -261,12 +258,12 @@ class Calculator extends React.Component {
               vatPercent={vatPercent}
               operation={operation}
               onButtonClick={(type, value) => this.handleButtonClick(type, value)}
-              />
+            />
           </Column>
 
         </Row>
       </div>
-    )
+    );
   }
 }
 

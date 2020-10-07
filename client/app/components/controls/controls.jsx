@@ -211,75 +211,71 @@ const bottomControlsProps = [
   },
 ];
 
-const Controls = (props) => {
-  return (
-    <div className={styles.controls}>
-      <Row row center>
-        <Column>
-          <Row row center wrap>
-            {leftControlsProps.map((item) => {
-              return (
-                <Column key={item.id} center grow>
-                  <Button
-                    id={item.id}
-                    type={item.type}
-                    value={item.value}
-                    display={item.display}
-                    theme={item.theme}
-                    onClick={props.onButtonClick}
-                    size={item.size}
-                  />
-                </Column>
-              );
-            })}
-          </Row>
+const Controls = (props) => (
+  <div className={styles.controls}>
+    <Row row center>
+      <Column>
+        <Row row center wrap>
+          {leftControlsProps.map((item) => (
+            <Column key={item.id} center grow>
+              <Button
+                id={item.id}
+                type={item.type}
+                value={item.value}
+                display={item.display}
+                theme={item.theme}
+                onClick={props.onButtonClick}
+                size={item.size}
+              />
+            </Column>
+          ))}
+        </Row>
 
-          <Row row center>
-            {bottomControlsProps.map((item) => {
-              const isVat = item.value === 'set-vat';
+        <Row row center>
+          {bottomControlsProps.map((item) => {
+            const isVat = item.value === 'set-vat';
 
-              return (
-                <Column key={item.id} center grow>
-                  <Button
-                    id={item.id}
-                    type={item.type}
-                    value={item.value}
-                    display={item.display}
-                    theme={item.theme}
-                    onClick={props.onButtonClick}
-                    vatPercent={isVat && props.vatPercent}
-                    size={item.size}
-                  />
-                </Column>
-              );
-            })}
-          </Row>
-        </Column>
+            return (
+              <Column key={item.id} center grow>
+                <Button
+                  id={item.id}
+                  type={item.type}
+                  value={item.value}
+                  display={item.display}
+                  theme={item.theme}
+                  onClick={props.onButtonClick}
+                  vatPercent={isVat && props.vatPercent}
+                  size={item.size}
+                />
+              </Column>
+            );
+          })}
+        </Row>
+      </Column>
 
-        <Column>
-          <Row column>
-            {rightControlsProps.map((item) => {
-              const isActive = item.value === props.operation;
-              return (
-                <Column key={item.id} center grow>
-                  <Button
-                    id={item.id}
-                    active={isActive}
-                    type={item.type}
-                    value={item.value}
-                    display={item.display}
-                    theme={item.theme}
-                    onClick={props.onButtonClick}
-                    size={item.size}
-                  />
-                </Column>
-              );
-            })}
-          </Row>
-        </Column>
-      </Row>
-    </div>
-  );
-};
+      <Column>
+        <Row column>
+          {rightControlsProps.map((item) => {
+            const isActive = item.value === props.operation;
+            return (
+              <Column key={item.id} center grow>
+                <Button
+                  id={item.id}
+                  active={isActive}
+                  type={item.type}
+                  value={item.value}
+                  display={item.display}
+                  theme={item.theme}
+                  onClick={props.onButtonClick}
+                  size={item.size}
+                />
+              </Column>
+            );
+          })}
+        </Row>
+      </Column>
+    </Row>
+  </div>
+);
 
 export default Controls;

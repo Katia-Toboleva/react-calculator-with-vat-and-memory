@@ -22,11 +22,14 @@ class Button extends React.Component {
         </>
       );
     }
+
     return display;
   }
 
   handleClick() {
-    this.props.onClick(this.props.type, this.props.value);
+    const { onClick, type, value } = this.props;
+
+    onClick(type, value);
   }
 
   handleMouseDown() {

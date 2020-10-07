@@ -17,20 +17,20 @@
     height: 50px;
   }
 
-  &--size-medium {
+  &--size-medium & {
     min-width: 75px;
     height: 50px;
 
-    .button__text {
+    &__text {
       font-size: 14px;
     }
   }
 
-  &--size-big {
+  &--size-big & {
     width: 50px;
     min-height: 100px;
 
-    .button__text {
+    &__text {
       font-size: 22px;
     }
   }
@@ -59,8 +59,8 @@
     background-color: rgb(154, 205, 50);
   }
 
-  &--value-set-vat {
-    .button__text {
+  &--value-set-vat & {
+    &__text {
       font-size: 14px;
     }
   }

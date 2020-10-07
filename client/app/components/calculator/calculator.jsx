@@ -1,16 +1,16 @@
 import React from 'react';
 import styles from './calculator.scss';
 import { Row, Column } from '../grid';
-import { Controls } from '../controls';
+import Controls from '../controls';
 import { Result } from '../result';
 
 class Calculator extends React.Component {
   constructor(props) {
     super(props);
+
     this.state = {
       savedNumber: 0,
       currentNumber: 0,
-      currentType: '',
       operation: '',
       memoValue: 0,
       vatPercent: 20,
@@ -20,6 +20,7 @@ class Calculator extends React.Component {
   calculateTotal() {
     const { currentNumber, savedNumber, operation } = this.state;
     let total;
+
     switch (operation) {
       case 'add': total = savedNumber + currentNumber; break;
       case 'multiply': total = savedNumber * currentNumber; break;
@@ -27,6 +28,7 @@ class Calculator extends React.Component {
       case 'divide': total = savedNumber / currentNumber; break;
       default: total = currentNumber; break;
     }
+
     return total;
   }
 
@@ -74,7 +76,6 @@ class Calculator extends React.Component {
   handleNumber(type, value) {
     return {
       currentNumber: Number(this.concatenateDisplayValues(value)),
-      currentType: type,
     };
   }
 
@@ -85,13 +86,16 @@ class Calculator extends React.Component {
         savedNumber: Number.parseFloat((this.calculateTotal()).toFixed(5)),
         operation: value,
       };
-    } if (savedNumber && !currentNumber) {
+    }
+
+    if (savedNumber && !currentNumber) {
       return {
         currentNumber: 0,
         savedNumber: Number.parseFloat((savedNumber).toFixed(5)),
         operation: value,
       };
     }
+
     return {
       currentNumber: 0,
       savedNumber: Number.parseFloat((currentNumber).toFixed(5)),
@@ -99,9 +103,9 @@ class Calculator extends React.Component {
     };
   }
 
-  handleClearC(type) {
+  handleClearC() {
+    const { type } = this.state;
     return {
-      currentType: type,
       currentNumber: '0',
     };
   }
@@ -109,7 +113,6 @@ class Calculator extends React.Component {
   handleClearAll(type) {
     return {
       savedNumber: 0,
-      currentType: type,
       currentNumber: 0,
       memoValue: 0,
       vatPercent: 20,
@@ -119,7 +122,6 @@ class Calculator extends React.Component {
 
   handleConvert(type) {
     return {
-      currentType: type,
       currentNumber: this.convertNumber(),
     };
   }
@@ -150,7 +152,6 @@ class Calculator extends React.Component {
 
   handlePercent(type) {
     return {
-      currentType: type,
       currentNumber: parseFloat((this.calculatePercent()).toFixed(5)),
     };
   }
@@ -158,14 +159,12 @@ class Calculator extends React.Component {
   handleDot(currentNumber, type) {
     return {
       currentNumber: `${currentNumber}.`,
-      currentType: type,
     };
   }
 
   handleDoubleZero(type, currentNumber) {
     return {
       currentNumber: Number(`${currentNumber}00`),
-      currentType: type,
     };
   }
 
@@ -179,14 +178,12 @@ class Calculator extends React.Component {
   handleAddVat(vatPercent, currentNumber, type) {
     return {
       currentNumber: parseFloat((currentNumber * Number(`1.${vatPercent}`)).toFixed(2)),
-      currentType: type,
     };
   }
 
   handleWithoutVat(vatPercent, currentNumber, type) {
     return {
       currentNumber: currentNumber - (parseFloat((((currentNumber / Number(`1.${vatPercent}`)) - currentNumber) * -1).toFixed(2))),
-      currentType: type,
     };
   }
 

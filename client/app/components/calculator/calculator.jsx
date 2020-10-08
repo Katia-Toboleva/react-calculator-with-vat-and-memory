@@ -195,7 +195,7 @@ class Calculator extends React.Component {
 
   handleWithoutVat(vatPercent, currentNumber) {
     return {
-      currentNumber: currentNumber - (parseFloat((((currentNumber / Number(`1.${vatPercent}`)) - currentNumber) * -1).toFixed(2))),
+      currentNumber: (currentNumber - parseFloat((((currentNumber / Number(`1.${vatPercent}`)) - currentNumber) * -1))).toFixed(2),
     };
   }
 

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import classnames from 'classnames/bind';
 import styles from './button.scss';
 
@@ -73,6 +74,23 @@ class Button extends React.Component {
 
 Button.defaultProps = {
   size: 'small',
+};
+
+Button.propTypes = {
+  onClick: PropTypes.func,
+  type: PropTypes.string,
+  value: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+  ]),
+  display: PropTypes.string,
+  theme: PropTypes.string,
+  active: PropTypes.bool,
+  size: PropTypes.string,
+  vatPercent: PropTypes.oneOfType([
+    PropTypes.bool,
+    PropTypes.number,
+  ]),
 };
 
 export default Button;

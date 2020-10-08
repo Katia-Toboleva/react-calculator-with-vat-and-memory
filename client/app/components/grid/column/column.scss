@@ -1,20 +1,18 @@
-.grid__item {
+.grid-item {
   flex-basis: auto;
 
-    &--shrink {
-      flex-shrink: 1;
-      flex-grow: 0;
-    }
+  &--shrink {
+    flex-shrink: 1;
+    flex-grow: 0;
+  }
 
-    &--grow {
-      flex-grow: 1;
-      flex-shrink: 0;
-    }
+  &--grow {
+    flex-grow: 1;
+    flex-shrink: 0;
+  }
 
-    &--center {
-      justify-content: center;
-      align-items: center;
-    }
-
-
+  &--center {
+    justify-content: center;
+    align-items: center;
+  }
 }

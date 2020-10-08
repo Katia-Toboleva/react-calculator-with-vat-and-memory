@@ -37,7 +37,7 @@
 
   &--color-dark {
     background-color: rgb(58, 49, 94);
-    color: white;
+    color: rgb(255, 255, 255);
   }
 
   &--color-light {
@@ -47,16 +47,16 @@
 
   &--color-gray {
     background-color: rgb(148, 138, 137);
-    color: white;
+    color: rgb(255, 255, 255);
   }
 
   &--color-bright {
     background-color: rgb(242, 107, 77);
-    color: white;
+    color: rgb(255, 255, 255);
   }
 
   &--active {
-    background-color: yellowgreen;
+    background-color: rgb(154, 205, 50);
   }
 
   &--value-set-vat {

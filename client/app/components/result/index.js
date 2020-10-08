@@ -1,1 +1,1 @@
-export {default as Result} from './result'
+export { default as Result } from './result';

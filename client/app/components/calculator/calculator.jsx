@@ -34,30 +34,43 @@ class Calculator extends React.Component {
 
   calculatePercent() {
     const { currentNumber, savedNumber, operation } = this.state;
+
     if (savedNumber && currentNumber && operation !== 'multiply' && operation !== 'divide') {
       return ((currentNumber * savedNumber) / 100);
     }
+
     return currentNumber * 0.01;
   }
 
   convertNumber() {
     const { currentNumber, savedNumber, operation } = this.state;
+
     if (operation === undefined && savedNumber !== 0 && currentNumber === 0) {
       return savedNumber * -1;
-    } if (operation === undefined && savedNumber !== 0 && currentNumber !== 0) {
-      return currentNumber * -1;
-    } if (currentNumber === 0) {
-      return `-${0}`;
-    } if (operation !== undefined && !currentNumber) {
-      return `-${0}`;
-    } if (operation !== undefined && currentNumber) {
+    }
+
+    if (operation === undefined && savedNumber !== 0 && currentNumber !== 0) {
       return currentNumber * -1;
     }
+
+    if (currentNumber === 0) {
+      return `-${0}`;
+    }
+
+    if (operation !== undefined && !currentNumber) {
+      return `-${0}`;
+    }
+
+    if (operation !== undefined && currentNumber) {
+      return currentNumber * -1;
+    }
+
     return savedNumber * -1;
   }
 
   recordValue() {
     const { currentNumber, savedNumber } = this.state;
+
     if (savedNumber) {
       return savedNumber;
     }
@@ -104,13 +117,12 @@ class Calculator extends React.Component {
   }
 
   handleClearC() {
-    const { type } = this.state;
     return {
       currentNumber: '0',
     };
   }
 
-  handleClearAll(type) {
+  handleClearAll() {
     return {
       savedNumber: 0,
       currentNumber: 0,
@@ -120,7 +132,7 @@ class Calculator extends React.Component {
     };
   }
 
-  handleConvert(type) {
+  handleConvert() {
     return {
       currentNumber: this.convertNumber(),
     };
@@ -150,13 +162,13 @@ class Calculator extends React.Component {
     };
   }
 
-  handlePercent(type) {
+  handlePercent() {
     return {
       currentNumber: parseFloat((this.calculatePercent()).toFixed(5)),
     };
   }
 
-  handleDot(currentNumber, type) {
+  handleDot(currentNumber) {
     return {
       currentNumber: `${currentNumber}.`,
     };
@@ -175,13 +187,13 @@ class Calculator extends React.Component {
     };
   }
 
-  handleAddVat(vatPercent, currentNumber, type) {
+  handleAddVat(vatPercent, currentNumber) {
     return {
       currentNumber: parseFloat((currentNumber * Number(`1.${vatPercent}`)).toFixed(2)),
     };
   }
 
-  handleWithoutVat(vatPercent, currentNumber, type) {
+  handleWithoutVat(vatPercent, currentNumber) {
     return {
       currentNumber: currentNumber - (parseFloat((((currentNumber / Number(`1.${vatPercent}`)) - currentNumber) * -1).toFixed(2))),
     };
@@ -200,16 +212,17 @@ class Calculator extends React.Component {
       currentNumber, savedNumber, memoValue, vatPercent,
     } = this.state;
     let newState;
+
     if (type === 'num') {
       newState = this.handleNumber(type, value);
     } else if (type === 'operation') {
       newState = this.handleOperation(currentNumber, savedNumber, value);
     } else if (value === 'clear') {
-      newState = this.handleClearC(type);
+      newState = this.handleClearC();
     } else if (value === 'clear-all') {
-      newState = this.handleClearAll(type);
+      newState = this.handleClearAll();
     } else if (value === 'convert') {
-      newState = this.handleConvert(type);
+      newState = this.handleConvert();
     } else if (value === 'memo-save') {
       newState = this.handleMemoSave();
     } else if (value === 'memo-add') {
@@ -219,22 +232,23 @@ class Calculator extends React.Component {
     } else if (value === 'memo-rec') {
       newState = this.handleMemoRec(memoValue);
     } else if (value === 'percent') {
-      newState = this.handlePercent(type);
+      newState = this.handlePercent();
     } else if (value === 'dot') {
       if (`${currentNumber}`.indexOf('.') === -1) {
-        newState = this.handleDot(currentNumber, type);
+        newState = this.handleDot(currentNumber);
       }
     } else if (value === '00') {
       newState = this.handleDoubleZero(type, currentNumber);
     } else if (value === 'set-vat') {
       newState = this.handleSetVat(vatPercent);
     } else if (value === 'add-vat') {
-      newState = this.handleAddVat(vatPercent, currentNumber, type);
+      newState = this.handleAddVat(vatPercent, currentNumber);
     } else if (value === 'without-vat') {
-      newState = this.handleWithoutVat(vatPercent, currentNumber, type);
+      newState = this.handleWithoutVat(vatPercent, currentNumber);
     } else if (value === 'equals') {
       newState = this.handleEquals();
     }
+
     this.setState(newState);
   }
 

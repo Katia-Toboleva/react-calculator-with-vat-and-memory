@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styles from './controls.scss';
 import { Row, Column } from '../grid';
 import { Button } from '../button';
@@ -277,5 +278,11 @@ const Controls = (props) => (
     </Row>
   </div>
 );
+
+Controls.propTypes = {
+  onButtonClick: PropTypes.func,
+  vatPercent: PropTypes.number,
+  operation: PropTypes.string,
+};
 
 export default Controls;

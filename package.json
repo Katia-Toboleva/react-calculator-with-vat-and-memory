@@ -2,12 +2,15 @@
   "name": "react-calc",
   "version": "1.0.0",
   "description": "",
+  "homepage": "http://katia-2020.github.io/react-calc",
   "main": "index.js",
   "scripts": {
     "start": "webpack-dev-server --env.NODE_ENV-development --progress",
     "lint": "npm run lint-css && npm run lint-js",
     "lint-js": "npx eslint --ext .jsx --ext .js .",
-    "lint-css": "npx stylelint \"**/*.scss\""
+    "lint-css": "npx stylelint \"**/*.scss\"",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages main -d build"
   },
   "author": "",
   "license": "ISC",
@@ -30,6 +33,7 @@
     "eslint-plugin-react": "^7.21.3",
     "eslint-plugin-react-hooks": "^4.1.2",
     "file-loader": "^6.1.0",
+    "gh-pages": "^3.1.0",
     "node-sass": "^4.14.1",
     "sass-loader": "^10.0.2",
     "style-loader": "^1.3.0",

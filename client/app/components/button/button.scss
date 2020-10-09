@@ -1,5 +1,4 @@
 .button {
-  display: inline-block;
   position: relative;
   cursor: pointer;
 
@@ -13,12 +12,12 @@
   }
 
   &--size-small {
-    min-width: 50px;
+    width: 50px;
     height: 50px;
   }
 
   &--size-medium {
-    min-width: 75px;
+    width: 75px;
     height: 50px;
 
     .button__text {
@@ -28,7 +27,7 @@
 
   &--size-big {
     width: 50px;
-    min-height: 100px;
+    height: 100px;
 
     .button__text {
       font-size: 22px;

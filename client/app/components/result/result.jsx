@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styles from './result.scss';
 import { Row, Column } from '../grid';
 
@@ -11,5 +12,12 @@ const Result = ({ value }) => (
     </Row>
   </div>
 );
+
+Result.propTypes = {
+  value: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+  ]),
+};
 
 export default Result;

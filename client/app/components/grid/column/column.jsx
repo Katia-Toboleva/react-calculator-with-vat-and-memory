@@ -4,6 +4,7 @@ import classnames from 'classnames/bind';
 import styles from './column.scss';
 
 const cx = classnames.bind(styles);
+
 const Column = (props) => {
   const {
     children, grow, shrink, center,

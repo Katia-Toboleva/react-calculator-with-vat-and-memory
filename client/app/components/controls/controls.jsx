@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './controls.scss';
 import { Row, Column } from '../grid';
-import { Button } from '../button';
+import Button from '../button';
 
 const leftControlsProps = [
   {
@@ -214,11 +214,11 @@ const bottomControlsProps = [
 
 const Controls = (props) => (
   <div className={styles.controls}>
-    <Row row center>
+    <Row row>
       <Column>
-        <Row row center wrap>
+        <Row row wrap>
           {leftControlsProps.map((item) => (
-            <Column key={item.id} center grow>
+            <Column key={item.id}>
               <Button
                 id={item.id}
                 type={item.type}
@@ -237,7 +237,7 @@ const Controls = (props) => (
             const isVat = item.value === 'set-vat';
 
             return (
-              <Column key={item.id} center grow>
+              <Column key={item.id} center>
                 <Button
                   id={item.id}
                   type={item.type}
@@ -259,7 +259,7 @@ const Controls = (props) => (
           {rightControlsProps.map((item) => {
             const isActive = item.value === props.operation;
             return (
-              <Column key={item.id} center grow>
+              <Column key={item.id} center>
                 <Button
                   id={item.id}
                   active={isActive}

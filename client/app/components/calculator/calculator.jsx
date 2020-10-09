@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './calculator.scss';
 import { Row, Column } from '../grid';
 import Controls from '../controls';
-import { Result } from '../result';
+import Result from '../result';
 
 class Calculator extends React.Component {
   constructor(props) {

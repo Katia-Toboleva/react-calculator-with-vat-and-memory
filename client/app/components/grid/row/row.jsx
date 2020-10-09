@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import classnames from 'classnames/bind';
 import styles from './row.scss';
 
@@ -21,6 +22,15 @@ const Row = (props) => {
       {children}
     </div>
   );
+};
+
+Row.propTypes = {
+  children: PropTypes.node,
+  row: PropTypes.bool,
+  column: PropTypes.bool,
+  center: PropTypes.bool,
+  wrap: PropTypes.bool,
+  end: PropTypes.bool,
 };
 
 export default Row;

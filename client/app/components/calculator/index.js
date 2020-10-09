@@ -1,1 +1,1 @@
-export { default as Calculator } from './calculator';
+export { default } from './calculator';

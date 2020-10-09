@@ -2,7 +2,7 @@
   "name": "react-calc",
   "version": "1.0.0",
   "description": "",
-  "homepage": "http://katia-2020.github.io/react-calc",
+  "homepage": "https://katia-2020.github.io/react-calc",
   "main": "index.js",
   "scripts": {
     "start": "webpack-dev-server --env.NODE_ENV-development --progress",

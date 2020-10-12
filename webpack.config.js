@@ -1,12 +1,21 @@
 const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const webpackTemplate = require('./client/webpack/template');
 
-module.exports = ({ NODE_ENV }) => ({
+module.exports = ({ production, debug, NODE_ENV }) => ({
   mode: NODE_ENV,
   entry: './client/app/index.jsx',
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'assets/js/bundle.js',
   },
+  optimization: {
+    minimizer: (production && !debug) ? [new OptimizeCSSAssetsPlugin({})] : [],
+  },
+
   module: {
     rules: [
       {
@@ -22,12 +31,13 @@ module.exports = ({ NODE_ENV }) => ({
         test: /\.scss$/,
         exclude: /node_modules/,
         use: [
-          'style-loader',
+          ...((production || debug) ? [MiniCssExtractPlugin.loader] : []),
+          ...((!production && !debug) ? ['style-loader'] : []),
           {
             loader: 'css-loader',
             options: {
               modules: {
-                localIdentName: '[local]--[hash:base64:5]',
+                localIdentName: (production && !debug) ? '[hash:base64:5]' : '[local]--[hash:base64:5]',
               },
             },
           },
@@ -61,6 +71,20 @@ module.exports = ({ NODE_ENV }) => ({
   resolve: {
     extensions: ['.js', '.jsx'],
   },
+
+  plugins: [
+    new CleanWebpackPlugin(),
+    new HtmlWebpackPlugin({
+      templateContent: webpackTemplate,
+    }),
+    ...((production || debug) ? [
+      new MiniCssExtractPlugin({
+        filename: 'assets/css/[name].min.css',
+        chunkFilename: '[id].css',
+      }),
+    ] : []),
+  ],
+
   devServer: {
     historyApiFallback: true,
     open: true,

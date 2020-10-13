@@ -14,7 +14,7 @@ class Button extends React.Component {
     };
   }
 
-  setDisplay(display, vatPercent) {
+  buildButton(display, vatPercent) {
     if (vatPercent) {
       return (
         <>
@@ -65,7 +65,7 @@ class Button extends React.Component {
         onClick={() => this.handleClick()}
       >
         <div className={styles.button__text}>
-          {this.setDisplay(display, vatPercent)}
+          {this.buildButton(display, vatPercent)}
         </div>
       </div>
     );

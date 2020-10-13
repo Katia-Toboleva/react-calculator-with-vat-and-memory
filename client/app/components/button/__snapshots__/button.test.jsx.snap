@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Button render should render correctly 1`] = `
+<div
+  className="button button--color-dark button--size-big button--value-clear"
+  onClick={[Function]}
+  onMouseDown={[Function]}
+  onMouseUp={[Function]}
+>
+  <div
+    className="button__text"
+  >
+    C
+  </div>
+</div>
+`;
+
+exports[`Button render when I am not passing the size prop should render correctly 1`] = `
+<div
+  className="button button--color-dark button--size-small button--value-clear"
+  onClick={[Function]}
+  onMouseDown={[Function]}
+  onMouseUp={[Function]}
+>
+  <div
+    className="button__text"
+  >
+    C
+  </div>
+</div>
+`;

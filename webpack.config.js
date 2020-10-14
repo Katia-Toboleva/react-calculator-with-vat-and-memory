@@ -88,6 +88,5 @@ module.exports = ({ production, debug, NODE_ENV }) => ({
   devServer: {
     historyApiFallback: true,
     open: true,
-    publicPath: '/dist/',
   },
 });

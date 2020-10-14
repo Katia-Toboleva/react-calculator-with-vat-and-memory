@@ -139,20 +139,40 @@ class Calculator extends React.Component {
   }
 
   handleMemoSave() {
+    const { currentNumber } = this.state;
+
     return {
+      currentNumber: 0,
       memoValue: this.recordValue(),
+      savedNumber: currentNumber,
     };
   }
 
-  handleMemoAdd(memoValue, savedNumber) {
+  handleMemoAdd() {
+    const { currentNumber, memoValue, savedNumber } = this.state;
+
+    if (currentNumber === 0) {
+      return {
+        currentNumber: Number((memoValue + savedNumber).toFixed(2)),
+      };
+    }
+
     return {
-      savedNumber: memoValue + savedNumber,
+      currentNumber: Number((memoValue + currentNumber).toFixed(2)),
     };
   }
 
-  handleMemoSubtract(memoValue, savedNumber) {
+  handleMemoSubtract() {
+    const { currentNumber, memoValue, savedNumber } = this.state;
+
+    if (currentNumber === 0) {
+      return {
+        currentNumber: Number((memoValue - savedNumber).toFixed(2)),
+      };
+    }
+
     return {
-      savedNumber: memoValue - savedNumber,
+      currentNumber: Number((memoValue - currentNumber).toFixed(2)),
     };
   }
 
@@ -193,9 +213,19 @@ class Calculator extends React.Component {
     };
   }
 
-  handleWithoutVat(vatPercent, currentNumber) {
-    const vat = ((currentNumber / Number(`1.${vatPercent}`)) - currentNumber) * -1;
+  handleWithoutVat() {
+    const {
+      currentNumber, savedNumber, vatPercent,
+    } = this.state;
 
+    if (currentNumber === 0) {
+      const vat = ((savedNumber / Number(`1.${vatPercent}`)) - savedNumber) * -1;
+      return {
+        currentNumber: Number((savedNumber - vat).toFixed(2)),
+      };
+    }
+
+    const vat = ((currentNumber / Number(`1.${vatPercent}`)) - currentNumber) * -1;
     return {
       currentNumber: Number((currentNumber - vat).toFixed(2)),
     };
@@ -228,9 +258,9 @@ class Calculator extends React.Component {
     } else if (value === 'memo-save') {
       newState = this.handleMemoSave();
     } else if (value === 'memo-add') {
-      newState = this.handleMemoAdd(memoValue, savedNumber);
+      newState = this.handleMemoAdd();
     } else if (value === 'memo-subtract') {
-      newState = this.handleMemoSubtract(memoValue, savedNumber);
+      newState = this.handleMemoSubtract();
     } else if (value === 'memo-rec') {
       newState = this.handleMemoRec(memoValue);
     } else if (value === 'percent') {
@@ -246,7 +276,7 @@ class Calculator extends React.Component {
     } else if (value === 'add-vat') {
       newState = this.handleAddVat(vatPercent, currentNumber);
     } else if (value === 'without-vat') {
-      newState = this.handleWithoutVat(vatPercent, currentNumber);
+      newState = this.handleWithoutVat();
     } else if (value === 'equals') {
       newState = this.handleEquals();
     }

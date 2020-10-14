@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Calculator should render correctly 1`] = `
+<div
+  className="calculator"
+>
+  <Row
+    center={true}
+    column={true}
+  >
+    <Column>
+      <Result
+        value={0}
+      />
+    </Column>
+    <Column>
+      <Controls
+        onButtonClick={[Function]}
+        operation=""
+        vatPercent={20}
+      />
+    </Column>
+  </Row>
+</div>
+`;

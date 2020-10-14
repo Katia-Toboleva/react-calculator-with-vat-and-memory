@@ -9,6 +9,7 @@ const collection = [leftControlsProps, rightControlsProps, bottomControlsProps].
 describe('Control collection', () => {
   describe('numbers', () => {
     const numbers = collection.filter((item) => item.type === 'num');
+
     it('should have the same format', () => {
       numbers.forEach((item) => {
         expect(typeof item.value).toBe('number');

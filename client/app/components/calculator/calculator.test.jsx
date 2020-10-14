@@ -1,7 +1,6 @@
 import React from 'react';
 import { shallow, mount } from 'enzyme';
 import Calculator from './calculator';
-import Button from '../button';
 
 describe('Calculator', () => {
   it('should render correctly', () => {
@@ -10,7 +9,7 @@ describe('Calculator', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  describe('handleWithoutVat', ()=> {
+  describe('handleWithoutVat', () => {
     describe('when called', () => {
       it('should return a number', () => {
         const wrapper = shallow(<Calculator />);
@@ -41,7 +40,6 @@ describe('Calculator', () => {
         buttonEqual.simulate('click');
 
         expect(wrapper.state().savedNumber).toBe(72.33);
-
       });
     });
   });

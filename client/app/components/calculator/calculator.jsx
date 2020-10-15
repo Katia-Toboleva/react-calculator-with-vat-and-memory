@@ -39,6 +39,10 @@ class Calculator extends React.Component {
       return ((currentNumber * savedNumber) / 100);
     }
 
+    if (!currentNumber) {
+      return savedNumber * 0.01;
+    }
+
     return currentNumber * 0.01;
   }
 

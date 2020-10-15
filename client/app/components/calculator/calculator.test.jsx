@@ -115,6 +115,56 @@ describe('Calculator', () => {
     });
   });
 
+  describe ('convertNumber', () => {
+    describe('when called', () => {
+      it('should return a correct number', () => {
+        const states = [
+          {
+            expected: -10,
+            state: { savedNumber: 10, currentNumber: 0, operation:  undefined },
+          },
+          {
+            expected: -5,
+            state: { savedNumber: 10, currentNumber: 5, operation: undefined },
+          },
+          {
+            expected: -5,
+            state: { savedNumber: 0, currentNumber: 5, operation: undefined },
+          },
+          {
+            expected: '-0',
+            state: { savedNumber: 0, currentNumber: 0, operation: undefined },
+          },
+          {
+            expected: '-0',
+            state: { savedNumber: 10, currentNumber: 0, operation: 'multiply' },
+          },
+          {
+            expected: -5,
+            state: { savedNumber: 10, currentNumber: 5, operation: 'multiply' },
+          },
+          {
+            expected: '-0',
+            state: { savedNumber: 0, currentNumber: 0, operation: 'add' },
+          },
+          {
+            expected: -10,
+            state: { savedNumber: 0, currentNumber: 10, operation: 'subtract' },
+          },
+        ];
+
+        states.forEach((stateItem) => {
+          const wrapper = getUnit();
+          wrapper.setState(stateItem.state);
+          const {expected} = stateItem;
+          const received = wrapper.instance().convertNumber();
+
+          expect(received).toEqual(expected);
+        });
+      });
+    });
+  });
+
   describe('handleWithoutVat', () => {
     describe('when called', () => {
       it('should return a number', () => {

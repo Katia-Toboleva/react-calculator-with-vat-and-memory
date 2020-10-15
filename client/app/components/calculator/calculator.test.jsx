@@ -117,11 +117,11 @@ describe('Calculator', () => {
 
   describe ('convertNumber', () => {
     describe('when called', () => {
-      it('should return a correct number', () => {
+      it('should return a correct value', () => {
         const states = [
           {
             expected: -10,
-            state: { savedNumber: 10, currentNumber: 0, operation:  undefined },
+            state: { savedNumber: 10, currentNumber: 0, operation: undefined },
           },
           {
             expected: -5,
@@ -158,6 +158,40 @@ describe('Calculator', () => {
           wrapper.setState(stateItem.state);
           const {expected} = stateItem;
           const received = wrapper.instance().convertNumber();
+
+          expect(received).toEqual(expected);
+        });
+      });
+    });
+  });
+
+  describe('recordValue', () => {
+    describe('when called', () => {
+      it('should return correct number', () => {
+        const states = [
+          {
+            expected: 5,
+            state: {currentNumber: 10, savedNumber: 5},
+          },
+          {
+            expected: 10,
+            state: {currentNumber: 10, savedNumber: 0},
+          },
+          {
+            expected: 0,
+            state: {currentNumber: 0, savedNumber: 0},
+          },
+          {
+            expected: 5,
+            state: {currentNumber: 0, savedNumber: 5},
+          },
+        ];
+
+        states.forEach((stateItem) => {
+          const wrapper = getUnit();
+          wrapper.setState(stateItem.state);
+          const { expected } = stateItem;
+          const received = wrapper.instance().recordValue();
 
           expect(received).toEqual(expected);
         });

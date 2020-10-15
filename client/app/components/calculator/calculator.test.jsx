@@ -2,6 +2,10 @@ import React from 'react';
 import { shallow, mount } from 'enzyme';
 import Calculator from './calculator';
 
+const getUnit = (props) => (
+  shallow(<Calculator {...props} />)
+);
+
 describe('Calculator', () => {
   it('should render correctly', () => {
     const wrapper = shallow(<Calculator />);
@@ -9,14 +13,84 @@ describe('Calculator', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
+  describe('state', () => {
+    describe('when the component first mounts', () => {
+      it('should match the default state', () => {
+        const wrapper = getUnit();
+        const expected = {
+          savedNumber: 0,
+          currentNumber: 0,
+          operation: '',
+          memoValue: 0,
+          vatPercent: 20,
+        };
+        const received = wrapper.state();
+
+        expect(received).toMatchObject(expected);
+      });
+    });
+  });
+
+  describe('calculateTotal', () => {
+    describe('when called', () => {
+      it('should return correct total number', () => {
+        const states = [
+          {
+            expected: 15,
+            state: { savedNumber: 10, currentNumber: 5, operation: 'add' },
+          },
+          {
+            expected: 50,
+            state: { savedNumber: 10, currentNumber: 5, operation: 'multiply' },
+          },
+          {
+            expected: 5,
+            state: { savedNumber: 10, currentNumber: 5, operation: 'subtract' },
+          },
+          {
+            expected: 2,
+            state: { savedNumber: 10, currentNumber: 5, operation: 'divide' },
+          },
+          {
+            expected: 5,
+            state: { savedNumber: 10, currentNumber: 5, operation: undefined },
+          },
+        ];
+        console.log(getUnit().instance().calculateTotal());
+
+        states.forEach((stateItem) => {
+          const wrapper = getUnit();
+          wrapper.setState(stateItem.state);
+          const { expected } = stateItem;
+          const received = wrapper.instance().calculateTotal();
+
+          expect(received).toEqual(expected);
+        });
+      });
+    });
+  });
+
   describe('handleWithoutVat', () => {
     describe('when called', () => {
       it('should return a number', () => {
-        const wrapper = shallow(<Calculator />);
-        const received = wrapper.instance().handleWithoutVat(20, 100);
-        const expected = { currentNumber: 83.33 };
+        const states = [
+          {
+            expected: 83.33,
+            state: { currentNumber: 0, savedNumber: 100, vatPercent: 20 },
+          },
+          {
+            expected: 83.33,
+            state: { currentNumber: 100, savedNumber: 0, vatPercent: 20 },
+          },
+        ];
 
-        expect(received).toMatchObject(expected);
+        states.forEach((stateItem) => {
+          const wrapper = getUnit();
+          wrapper.setState(stateItem.state);
+          const { expected } = stateItem;
+          const received = wrapper.instance().handleWithoutVat().currentNumber;
+          expect(received).toEqual(expected);
+        });
       });
     });
   });

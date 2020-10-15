@@ -49,16 +49,12 @@ class Calculator extends React.Component {
   convertNumber() {
     const { currentNumber, savedNumber, operation } = this.state;
 
-    if (operation === undefined && savedNumber !== 0 && currentNumber === 0) {
+    if (operation === undefined && savedNumber && !currentNumber) {
       return savedNumber * -1;
     }
 
-    if (operation === undefined && savedNumber !== 0 && currentNumber !== 0) {
+    if (operation === undefined && currentNumber) {
       return currentNumber * -1;
-    }
-
-    if (currentNumber === 0) {
-      return `-${0}`;
     }
 
     if (operation !== undefined && !currentNumber) {
@@ -67,6 +63,10 @@ class Calculator extends React.Component {
 
     if (operation !== undefined && currentNumber) {
       return currentNumber * -1;
+    }
+
+    if (!savedNumber && !currentNumber) {
+      return `-${0}`;
     }
 
     return savedNumber * -1;

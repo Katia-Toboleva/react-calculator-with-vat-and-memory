@@ -56,13 +56,58 @@ describe('Calculator', () => {
             state: { savedNumber: 10, currentNumber: 5, operation: undefined },
           },
         ];
-        console.log(getUnit().instance().calculateTotal());
 
         states.forEach((stateItem) => {
           const wrapper = getUnit();
           wrapper.setState(stateItem.state);
           const { expected } = stateItem;
           const received = wrapper.instance().calculateTotal();
+
+          expect(received).toEqual(expected);
+        });
+      });
+    });
+  });
+
+  describe('calculatePercent', () => {
+    describe('when called', () => {
+      it('should return a correct number', () => {
+        const states = [
+          {
+            expected: 0.5,
+            state: { savedNumber: 10, currentNumber: 5, operation: 'add' },
+          },
+          {
+            expected: 0.05,
+            state: { savedNumber: 0, currentNumber: 5, operation: 'add' },
+          },
+          {
+            expected: 0.5,
+            state: { savedNumber: 10, currentNumber: 5, operation: 'subtract' },
+          },
+          {
+            expected: 0.1,
+            state: { savedNumber: 10, currentNumber: 0, operation: 'subtract' },
+          },
+          {
+            expected: 0.5,
+            state: { savedNumber: 10, currentNumber: 5, operation: undefined },
+          },
+          {
+            expected: 0.05,
+            state: { savedNumber: 10, currentNumber: 5, operation: 'divide' },
+          },
+          {
+            expected: 0.05,
+            state: { savedNumber: 10, currentNumber: 5, operation: 'multiply' },
+          },
+        ];
+
+        states.forEach((stateItem) => {
+          const wrapper = getUnit();
+          wrapper.setState(stateItem.state);
+          const { expected } = stateItem;
+          const received = wrapper.instance().calculatePercent();
 
           expect(received).toEqual(expected);
         });

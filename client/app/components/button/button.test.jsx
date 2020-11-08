@@ -17,7 +17,7 @@ describe('Button', () => {
     });
 
     describe('when I am not passing the size prop', () => {
-      it ('should render correctly', () => {
+      it('should render correctly', () => {
         const wrapper = shallow(<Button
           type="function"
           value="clear"

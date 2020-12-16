@@ -6,7 +6,7 @@ The calculator has all the basic functionality (add, subtract, multiply, divide,
 React, JavaScript, TDD testing (Jest, Enzyme), GitHub branches, SCSS and CSS modules, Webpack, Babel, Eslint, Stylelint.
 
 ### Demo:
-1. Divide, multiply, add, subtract
+1.Divide, multiply, add, subtract
 
 ![calculator-1](https://user-images.githubusercontent.com/66952678/100894985-fbe86080-34b4-11eb-9a45-057bf8d0a78a.gif)
 
